@@ -62,3 +62,21 @@ The t-distribution shows how likely different t values are. It is centered on 0 
 
 > **p value:** If there were truly no relationship between 𝑋 and 𝑌 (i.e., 𝛽_1 = 0), how likely is it that we would observe a t-statistic at least this extreme by random chance?
 
+### 3.1.3 Assessing the accuracy of the model
+<u>**residual standard error:**</u>
+
+Used to estimate of standard derivation of $\epsilon$. It is the average amount that the response will deviate from the true regression line. RSE is considered a measure of **lack of fit**. 
+
+$$RSE = \sqrt{\frac{1}{n-2}RSS} = \sqrt{\frac{1}{n-2} \sum^n_{i=1}(y_i-\hat y_i)^2} $$
+
+If RSE is small the fit is good.
+
+<u>**$R^2$ Statistic**</u>
+
+$R^2$ is independent of the scale of Y since it always has a value between 0 and 1. 
+
+$$R^2 = 1- \frac{RSS}{TSS} = 1- \frac{\sum^n_{i=1}(y_i-\hat y_i)^2}{\sum^n_{i=1}(y_i-\overline y_i)^2}$$
+
+It measures the total variance in the response Y so the proportion of variability in Y that can be explained using X. $R^2$ is identical to the squared correlation. 
+
+
