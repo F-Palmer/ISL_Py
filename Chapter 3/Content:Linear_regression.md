@@ -77,6 +77,66 @@ $R^2$ is independent of the scale of Y since it always has a value between 0 and
 
 $$R^2 = 1- \frac{RSS}{TSS} = 1- \frac{\sum^n_{i=1}(y_i-\hat y_i)^2}{\sum^n_{i=1}(y_i-\overline y_i)^2}$$
 
-It measures the total variance in the response Y so the proportion of variability in Y that can be explained using X. $R^2$ is identical to the squared correlation. 
+TSS measures the total variance in the response Y, $R^2$ the proportion of variability in Y that can be explained using X. $R^2$ is identical to the squared correlation in the case of simple linear regression. In multiple linear regression it equals $Cor(Y, \hat Y)^2$.
 
+$R^2$ will always increase if more predictors are added.
+
+## 3.2 Multiple linear regression
+
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p + \epsilon$$
+
+### 3.2.1 Estimating the regression coefficients
+
+Parameters are still estimated using the least squares method. 
+
+Does it make sense, that multiple regression suggest to relationship between $X_a$ and Y, while simple linear regression implies the opposite?
+**Yes**: Consider a situation where $X_a$ and $X_b$ have a small correlation. If $X_a$ has a relationship with Y then the simple linear regression for both a and b suggest a relationship with Y because of their correlation. Multiple linear regression does not have this issue.
+
+### 3.2.2 Some important questions
+#### One: Is there a relationship between the response and the predictors?
+
+$$H_0 = \forall i < p: \beta_i = 0$$
+
+For this we use a F-statistic: 
+
+$$F = \frac{\frac{1}{p}(TSS-RSS)}{\frac{1}{n-p-1} RSS}$$
+
+Where:
+$$TSS = \sum(y_i - \overline y)^2; \space \space RSS= \sum(y_i - \hat y)^2 $$ 
+
+If the linear model assumptions are correct and $H_0$ ist true then $F = 1$. A larger F statistic is needed to reject $H_0$ if n is small. If $H_0$ is true and $\epsilon$ is normally distributed.
+
+F-statistic adjusts for the number of predictors. 
+
+#### Two: Deciding on important variables
+
+Most of the time Y is only related to a subset of X. 
+
+> Variable selection: determining which predictors are assciated with the response
+
+The best way would be to check every combination of p for the best subset of p for the prediction. This would, however, mean that $2^p$ models need to be computed.
+Other approaches: 
+
+> Forward selection (Greedy): Begin with no predictors and add the predictor that results in the lowest RSS value... continue until it passes a certain threshold
+
+> Backward selection: Begin with all predictors and always remove the predictor with the biggest p-value
+
+> Mixed selection: Begin with no predictors and start with Backward selection. If the p-value of a predictor in the selected list gets to large, it will be removed.
+
+#### Three: Model fit
+
+$R^2$ and RSE are measures of model fit. If adding a new predictor improves $R^2$ significantly than the model with the new predicted is better than without it.  
+
+Models with more variables can have higher RSE if the decrease in RSS is small relative to the increase in p. 
+
+#### Four: Predictions
+
+Three types of uncertainties are associated with the prediction: 
+
+1. reducible error: estimate the true regression plane
+2. bias: approximation of reality
+3. random error
+
+Therefore, we calculate confidence intervals to quantify the uncertainty in, for example, the average of a large number of datapoints. 
+Prediction intervals are used to quantify the uncertainty in predictions for a specific datapoint. 
 
