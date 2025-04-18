@@ -185,7 +185,7 @@ Can also be done with, for example $\sqrt .$ or $log(.)$
 
 #### 1. Non-linearity of the Data
 
-Use residual plots to identify non-linearity (see [residual plot](summaries/some_additional_plots.ipynb)). 
+Use residual plots to identify non-linearity (see [residual plot](some_additional_plots.ipynb)). 
 If the residual plot shows a pattern, then there is a problem with the linear model.
 
 #### 2. Correlation of error terms
@@ -236,3 +236,21 @@ Can be identified using a variance inflation factor (VIF), which is the ratio of
 
 Solution: dropping problematic predictors or combining the two variables together
 
+## 3.5 Comparison of Linear Regression with K-Nearest Neighbors
+
+KNN regression first identifies the K training observations that are closest to $x_0$. 
+It then estimates $f(x_0)$ using the average of all the training responses. 
+
+$$\hat f(x_0) = \frac{1}{K}\sum_{x_i \in N_0} y_i$$ 
+
+Higher K means smoother fit. Optimal K value depends on bias-variance trade of. 
+
+This non-parametric approach has higher variance but a reduction in bias. 
+KNN performs better than linear regression if the relationship between X and Y is far from linear. 
+BUT in high dimensions KNN gets much worse. 
+
+> **curse of dimensionality**: K observations that are nearest to $x_0$ may be very far away in p-dimensional space, leading to a poor KNN fit.
+> 
+> As a general rule: parametric methods tend to outperform non-parametric methods when there are few observations per predictor.
+
+If inference is the goal, KNN is bad since the resulting fit cannot easily be interpreted. 
