@@ -185,7 +185,7 @@ Can also be done with, for example $\sqrt .$ or $log(.)$
 
 #### 1. Non-linearity of the Data
 
-Use residual plots to identify non-linearity (see [residual plot](Chapter 3/some_additional_plots.ipynb)). 
+Use residual plots to identify non-linearity (see [residual plot](summaries/some_additional_plots.ipynb)). 
 If the residual plot shows a pattern, then there is a problem with the linear model.
 
 #### 2. Correlation of error terms

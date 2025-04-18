@@ -2,4 +2,4 @@
 
 ## Summaries
 
-[Chapter 3](Chapter 3/Content:Linear_regression.md)
+[Chapter 3](summaries/Linear_regression.md)
