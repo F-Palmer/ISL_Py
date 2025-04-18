@@ -140,3 +140,99 @@ Three types of uncertainties are associated with the prediction:
 Therefore, we calculate confidence intervals to quantify the uncertainty in, for example, the average of a large number of datapoints. 
 Prediction intervals are used to quantify the uncertainty in predictions for a specific datapoint. 
 
+## 3.3 Other considerations in the regression model
+
+### 3.3.1 Qualitative Predictors
+
+**Dummy variables** (one-hot encoding) with to levels: code on to 1 and the other 0 or -1.
+
+**Dummy variables** with multiple levels: 
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i =
+\begin{cases}
+\beta_0 + \beta_1 + \epsilon_i & \text{if } i\text{th person is from the South} \\
+\beta_0 + \beta_2 + \epsilon_i & \text{if } i\text{th person is from the West} \\
+\beta_0 + \epsilon_i & \text{if } i\text{th person is from the East}
+\end{cases}
+$$
+
+The level without a dummy variable is the baseline.
+
+### 3.3.2 Extensions of the linear model 
+
+Assumptions in linear models: 
+1. relationship is linear
+2. relationship is additive (association between $X_j$ and Y does not depend on the values of other predictors) (spending money on radio advertising might improve the effectivity of TV advertising)
+
+#### Removing the Additive Assumption
+
+Removing an **interaction effect**. It can be done with an interaction term: 
+
+$$Y= \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 * \epsilon$$
+
+> **hierarchical principal:** if an interaction term between a and b is in the model, then the **main effects** of a and b also need to be included
+
+#### Non-linear Relationships
+
+polynomial regression is still linear regression: 
+
+$$Y = \beta_0 + \beta_1X_1 + \beta_2X_1^2 + \epsilon$$
+
+Can also be done with, for example $\sqrt .$ or $log(.)$
+
+### 3.3.3 Potential Problems
+
+#### 1. Non-linearity of the Data
+
+Use residual plots to identify non-linearity (see [residual plot](Chapter 3/some_additional_plots.ipynb)). 
+If the residual plot shows a pattern, then there is a problem with the linear model.
+
+#### 2. Correlation of error terms
+
+The Assumption is that the error term of observation 1 is not correlated with that of observation 2. 
+If this is not the case the SE is an underestimation. 
+This frequently occurs in time series data. 
+
+We can plot the residuals from our model as a function of time.
+If there are noticeable patterns, then the assumption is likely not correct (adjacent residuals may have similar values).
+
+Solution: good experiment design
+
+#### 3. Non-constant Variance of error terms
+
+> heteroscedasticity: non-constant variances in the errors
+
+Can be identified if there is a funnel shape in the residual plot. 
+
+Solution: use functions like $logY$ or $\sqrt Y$. OR weighted the least square ??
+
+#### 4. Outliers
+
+> **Outlier**: is a point for which $y_i$ is far from the predicted value.
+
+Outliers with usual predictor values have little effect on the least squares fit.
+It can, however, influence other parts of the linear regression (eg. the RSE).
+
+Studentized residuals can be used to identify outliers. Residuals divided by the estimated standard error. 
+Observations that have Studentized residual above 3 or below -3 are possible outliers. 
+
+Solution: remove the outlier, or look for possible missing predictors that can explain the outliers
+
+#### 5. High leverage points
+
+> **High leverage points**: observations with unusual values for x
+
+Have a bigger impact on the regression than outliers. 
+Some observations might have normal values for each predictor, but the combination of those values might be unusual. 
+
+A leverage statistic can be computed, to identify observations with high leverage. 
+
+#### 6. Collinearity
+
+> **Collinearity**: Two or more predictors are closely related to one another, they are correlated.
+
+Can be identified using a variance inflation factor (VIF), which is the ratio of the variance of $\hat \beta_j$ when fitting the full model divided by the variance of $\hat \beta_j$ if fit on its own.
+
+Solution: dropping problematic predictors or combining the two variables together
+
